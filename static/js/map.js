@@ -182,10 +182,10 @@ $(function() {
 
 
     var markers = [];
-    for (var i = 0; i < 100; i++) {
-        var dataPhoto = data.photos[i];
-        var latLng = new google.maps.LatLng(dataPhoto.latitude,
-            dataPhoto.longitude);
+    for (var i = data.clubs.length; i > 0; i--) {
+        var clubs = data.clubs[i-1];
+        var latLng = new google.maps.LatLng(clubs.address_lat,
+            clubs.address_lon);
         var marker = addMarker(
             gmap,
             latLng,

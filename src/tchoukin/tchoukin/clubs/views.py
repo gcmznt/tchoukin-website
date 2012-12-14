@@ -18,4 +18,4 @@ def allclubs(request):
         row = {f: get_field(getattr(instance, f)) for f in model_fields}
         clubs.append(row)
 
-    return HttpResponse(json.dumps(clubs), mimetype="application/json")
+    return HttpResponse('var data = {"clubs": ' + json.dumps(clubs) + '}', mimetype="application/json")
