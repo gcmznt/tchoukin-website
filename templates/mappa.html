@@ -1,0 +1,63 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <title>Tchouk IN</title>
+    <meta name="description" content="None"/>
+    <meta name="keywords" content="None"/>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+    <link href="{{ STATIC_URL }}css/tchoukin.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <div id="map" class="map"></div>
+    
+    <header>
+        <h1>
+            Tchouk in
+            <input type="text" placeholder="..." class="addresspicker" value="{{ where }}" />
+            <a href="#" class="btn btn-large hide" id="add">Add</a>
+        </h1>
+        {% crispy clubform %}
+    </header>
+
+    <script src="{{ STATIC_URL }}js/jquery-1.8.2.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/data.json"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-typeahead.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.addresspicker.bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}js/utilities.js"></script>
+    <script src="{{ STATIC_URL }}js/map.js"></script>
+    {% if where %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var where = '{{ where }}';
+            var addresspicker = addresspickerMap.data().addresspicker;
+            var item = addresspicker.geocoder.geocode({
+                'address': where+" ",
+                'region': addresspicker.options.regionBias
+            }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                       addresspicker.$element.trigger('addressChanged', results[i]);
+                       break;
+                    }
+                }
+            });
+        });
+    </script>
+    {% endif %}
+
+</body>
+</html>

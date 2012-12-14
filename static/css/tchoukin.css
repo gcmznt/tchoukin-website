@@ -1,0 +1,37 @@
+html,
+body,
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    background: rgba(255,255,255,0.7);
+    padding: 5px 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px #333;
+}
+header h1 {
+    float: left;
+    font-family: 'Lobster', cursive;
+}
+header h1 input[type="text"] {
+    font-family: 'Lobster', cursive;
+    margin-top: 0px;
+    margin-bottom: 0;
+    font-size: 28.5px;
+    line-height: 40px;
+    height: auto;
+    width: 350px;
+}
+.dropdown-menu {
+    background: rgba(255,255,255,0.7);
+    box-shadow: 1px 1px 5px #333;
+}
+
+#map label { width: auto; display:inline; }
+#map img { max-width: none; }
+
