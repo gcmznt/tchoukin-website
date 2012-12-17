@@ -37,7 +37,8 @@ class Club(models.Model):
             self.ip_address = '127.0.0.1'  # TODO ip
             self.confirmation_code = uuid.uuid1().hex
 
-        print self.confirmation_code
-        send_mail('Subject here', 'Here is the message.', 'from@example.com', ['to@example.com'], fail_silently=False)
+        # TODO email
+        # print self.confirmation_code
+        # send_mail('Confirm your place', 'To confirm your place go to this URL:', 'from@example.com', ['to@example.com'], fail_silently=False)
 
         super(Club, self).save(*args, **kwargs)
