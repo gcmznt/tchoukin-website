@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext as _
+from django.core.urlresolvers import reverse
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Field, Submit, Button, Hidden, Div, HTML
 from crispy_forms.bootstrap import FormActions, AppendedText, PrependedAppendedText
@@ -10,7 +11,8 @@ class ClubForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
-        self.helper.form_class = 'add-form form-horizontal hide'
+        self.helper.form_class = 'add-form ajax-form'
+        self.helper.form_action = reverse('save_club')
         self.helper.layout = Layout(
             Fieldset(
                 _(u'Informations'),
@@ -29,17 +31,16 @@ class ClubForm(forms.ModelForm):
                 Field('address_postal_code', css_class='addresspicker_postal_code'),
                 Field('address_address_without_number', css_class='addresspicker_route'),
                 Field('address_address_number', css_class='addresspicker_street_number'),
-                css_class = 'hide',
+                css_class='hide',
             ),
             FormActions(
-                Button('cancel', 'Annulla'),
-                Submit('save-and-continue', 'Salva e continua'),
+                Submit('save-and-continue', 'Salva'),
             )
         )
         return super(ClubForm, self).__init__(*args, **kwargs)
 
     class Meta:
-    	model = Club
+        model = Club
         fields = [
             'name',
             'website',

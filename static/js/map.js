@@ -4,6 +4,12 @@ var gmapmarker;
 var point,
     points = new google.maps.LatLngBounds();
 
+var pinImage = new google.maps.MarkerImage("/static/img/crosshairred.png",
+    new google.maps.Size(32, 32),
+    new google.maps.Point(0,0),
+    new google.maps.Point(16, 16),
+    new google.maps.Size(32, 32));
+
 
 function locationSuccess(position) {
     latitude = position.coords.latitude;
@@ -13,7 +19,7 @@ function locationSuccess(position) {
     marker.setPosition(pos);
 
     addresspickerMap.data().addresspicker._markerMoved();
-    find_closest_marker(latitude, longitude);
+    // find_closest_marker(latitude, longitude);
 }
 function locationFail() {
 }
@@ -62,7 +68,6 @@ function find_closest_marker(lat, lon) {
         }
     }
 
-    alert(gmap.markers[closest].title);
 }
 
 
@@ -123,60 +128,8 @@ $(function() {
     gmapmarker = addresspickerMap.data().addresspicker.marker();
 
 
-    var pinColor = "FFFF00";
-    var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-        new google.maps.Size(21, 34),
-        new google.maps.Point(0,0),
-        new google.maps.Point(10, 34));
 
-    
-    // point = new google.maps.LatLng(40.842147, 14.249948);
-    // points.extend(point);
-    // addMarker(
-    //     gmap,
-    //     point,
-    //     pinImage,
-    //     'fd (RF00000004)',
-    //     'Saronno 4<br />www.saronnocomets.it',
-    //     100,
-    //     '#RF00000004'
-    // );
-    
-    // point = new google.maps.LatLng(45.455948, 9.157624);
-    // points.extend(point);
-    // addMarker(
-    //     gmap,
-    //     point,
-    //     pinImage,
-    //     'Milano via Stendhal (RF00000003)',
-    //     'Saronno 3<br />www.saronnocomets.it',
-    //     100,
-    //     '#RF00000003'
-    // );
-    
-    // point = new google.maps.LatLng(45.932233, 8.482546);
-    // points.extend(point);
-    // addMarker(
-    //     gmap,
-    //     point,
-    //     pinImage,
-    //     'Casa al lago (RF00000001)',
-    //     'Saronno 1<br />www.saronnocomets.it',
-    //     100,
-    //     '#RF00000001'
-    // );
-    
-    // point = new google.maps.LatLng(44.386367, 9.035111);
-    // points.extend(point);
-    // addMarker(
-    //     gmap,
-    //     point,
-    //     pinImage,
-    //     'Amabile appartamento in zona verdeggiante (RF00000002)',
-    //     'Saronno 2<br />www.saronnocomets.it',
-    //     100,
-    //     '#RF00000002'
-    // );
+
     
     // gmap.fitBounds(points);
 
@@ -184,15 +137,13 @@ $(function() {
     var markers = [];
     for (var i = data.clubs.length; i > 0; i--) {
         var clubs = data.clubs[i-1];
-        var latLng = new google.maps.LatLng(clubs.address_lat,
-            clubs.address_lon);
+        var latLng = new google.maps.LatLng(clubs.address_lat, clubs.address_lon);
         var marker = addMarker(
             gmap,
             latLng,
             pinImage,
-            'Titolo',
-            'Saronno<br />www.saronnocomets.it',
-            100
+            clubs.name,
+            clubs.name + '<br />' + clubs.email + '<br />' + clubs.website
         );
         markers.push(marker);
     }
@@ -202,7 +153,6 @@ $(function() {
 
 
     $(document).ready(function(){
-        navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
     });
 
 });
