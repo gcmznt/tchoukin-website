@@ -1,6 +1,4 @@
-import uuid
 from django.db import models
-from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
 
 
@@ -30,15 +28,3 @@ class Club(models.Model):
     class Meta:
         verbose_name = _(u'Club')
         verbose_name_plural = _(u'Clubs')
-
-    def save(self, *args, **kwargs):
-        if self.id is None:
-            self.status = 'pending'
-            self.ip_address = '127.0.0.1'  # TODO ip
-            self.confirmation_code = uuid.uuid1().hex
-
-        # TODO email
-        # print self.confirmation_code
-        # send_mail('Confirm your place', 'To confirm your place go to this URL:', 'from@example.com', ['to@example.com'], fail_silently=False)
-
-        super(Club, self).save(*args, **kwargs)

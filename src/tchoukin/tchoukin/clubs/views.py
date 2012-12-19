@@ -1,3 +1,6 @@
+import uuid
+import socket
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.utils import simplejson as json
 from django.http import HttpResponse
@@ -26,12 +29,19 @@ def confirmclub(request, code=''):
 
 def saveclub(request):
     response = {}
-    instance = Club()
+
+    confirmation_code = uuid.uuid1().hex
+    form_cls = ClubForm
+    partial = Club(ip_address=request.META['REMOTE_ADDR'], status='pending', confirmation_code=confirmation_code)
+
     if request.method == 'POST':
-        form = ClubForm(request.POST, request.FILES, instance=instance)
+
+        form = form_cls(request.POST, request.FILES, instance=partial)
         if form.is_valid():
             # print "Saving..."
-            instance = form.save()
+            newclub = form.save()
+            send_mail('Confirm your place', 'To confirm your place go to this URL: http://' + request.get_host() + '/clubs/confirm/' + confirmation_code, 'from@example.com', [newclub.email], fail_silently=False)
+
             response['status'] = 'ok'
         else:
             response['status'] = 'ko'
