@@ -46,7 +46,7 @@ def allclubs(request):
     model_fields = ['name', 'website', 'email', 'address_lat', 'address_lon']
     clubs = []
     for instance in Club.objects.filter(status='confirmed'):
-        row = {f: get_field(getattr(instance, f)) for f in model_fields}
+        row = dict((f, get_field(getattr(instance, f))) for f in model_fields)
         clubs.append(row)
 
     return HttpResponse('var data = {"clubs": ' + json.dumps(clubs) + '}', mimetype="application/json")
