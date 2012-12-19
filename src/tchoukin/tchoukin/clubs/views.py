@@ -40,7 +40,7 @@ def saveclub(request):
         if form.is_valid():
             # print "Saving..."
             newclub = form.save()
-            send_mail('Confirm your place', 'To confirm your place go to this URL: http://' + request.get_host() + '/clubs/confirm/' + confirmation_code, 'from@example.com', [newclub.email], fail_silently=False)
+            send_mail('Confirm your place', 'To confirm your place go to this URL: http://' + request.get_host() + '/clubs/confirm/' + confirmation_code, 'noreply@tchouk.in', [newclub.email], fail_silently=False)
 
             response['status'] = 'ok'
         else:

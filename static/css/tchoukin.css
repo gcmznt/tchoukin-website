@@ -35,6 +35,11 @@ header h1 {
     -o-text-shadow: 1px 1px 0 black;
     text-shadow: 1px 1px 0 black;
 }
+header h1 small {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
 header h1 input[type="text"] {
     font-family: 'Lobster', cursive;
     margin-top: 0px;
