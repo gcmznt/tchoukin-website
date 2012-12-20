@@ -192,7 +192,7 @@ $(function() {
         markers.push(marker);
     }
     var markerCluster = new MarkerClusterer(gmap, markers);
-    markerCluster.onClick = function() { return multiChoice(markerCluster); };
+    // markerCluster.onClick = function() { return multiChoice(markerCluster); };
 
 
 
