@@ -4,7 +4,7 @@ var gmapmarker;
 var point,
     points = new google.maps.LatLngBounds();
 
-var pinImage = new google.maps.MarkerImage("/static/img/crosshairred.png",
+var pinImage = new google.maps.MarkerImage("/static/img/ico_club.png",
     new google.maps.Size(32, 32),
     new google.maps.Point(0,0),
     new google.maps.Point(16, 16),
