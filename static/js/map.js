@@ -48,6 +48,49 @@ function addMarker(map, point, image, title, infoWindowContent, zIndex) {
 }
 
 
+var info = new google.maps.InfoWindow({});    // global InfoWindow object
+
+function multiChoice(mc) {
+    var cluster = mc.clusters_;
+     // if more than 1 point shares the same lat/long
+     // the size of the cluster array will be 1 AND
+     // the number of markers in the cluster will be > 1
+     // REMEMBER: maxZoom was already reached and we can't zoom in anymore
+     if (cluster.length == 1 && cluster[0].markers_.length > 1)
+     {
+      var markers = cluster[0].markers_;
+      var html = '';
+      html += '<div id="infoWin">';
+      html += '<h4>At this location:</h4>';
+      html += '<ul class="addrlist">';
+      for (var i=0; i < markers.length; i++)
+      {
+          html += '<li><a id="p' + markers[i].propertyId + '" href="javascript:;" rel="'+i+'">' + markers[i].title + '</a></li>';
+      }
+      html += '</ul>';
+      html += '</div>';
+
+          // I'm re-using the same global InfoWindow object here
+          info.close();
+          $('#infoWin').remove();
+          $(html).appendTo('body');
+
+          info.setContent(document.getElementById('infoWin'));
+          info.open(gmap, markers[0]);
+          // bind a click event to the list items to popup an InfoWindow
+          $('ul.addrlist li').click(function() {
+              var p = $(this).find("a").attr("rel");
+              // $(markers[p]).click();
+              google.maps.event.trigger(markers[p], 'click');
+              info.close();
+          });
+          return false;
+      }
+
+      return true;
+  }
+
+
 function rad(x) {return x*Math.PI/180;}
 function find_closest_marker(lat, lon) {
     var R = 6371; // radius of earth in km
@@ -134,6 +177,11 @@ $(function() {
     // gmap.fitBounds(points);
 
 
+
+
+
+
+
     var markers = [];
     for (var i = data.clubs.length; i > 0; i--) {
         var clubs = data.clubs[i-1];
@@ -148,7 +196,7 @@ $(function() {
         markers.push(marker);
     }
     var markerCluster = new MarkerClusterer(gmap, markers);
-
+    markerCluster.onClick = function() { return multiChoice(markerCluster); };
 
 
 
