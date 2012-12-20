@@ -1,6 +1,7 @@
 var addresspickerMap;
 var gmap;
 var gmapmarker;
+var myposmarker = undefined;
 var point,
     points = new google.maps.LatLngBounds();
 
@@ -9,10 +10,15 @@ var clubImage = new google.maps.MarkerImage("/static/img/ico_club.png",
     new google.maps.Point(0,0),
     new google.maps.Point(16, 16),
     new google.maps.Size(32, 32));
-var myposImage = new google.maps.MarkerImage("/static/img/ico_flag.png",
+var newImage = new google.maps.MarkerImage("/static/img/ico_flag.png",
     new google.maps.Size(32, 32),
     new google.maps.Point(0,0),
-    new google.maps.Point(11, 32),
+    new google.maps.Point(12, 30),
+    new google.maps.Size(32, 32));
+var myposImage = new google.maps.MarkerImage("/static/img/crosshairred.png",
+    new google.maps.Size(32, 32),
+    new google.maps.Point(0,0),
+    new google.maps.Point(16, 16),
     new google.maps.Size(32, 32));
 
 
@@ -23,6 +29,9 @@ function locationSuccess(position) {
     var marker = addresspickerMap.data().addresspicker.marker();
     marker.setPosition(pos);
 
+    myposmarker = addMarker(gmap, pos, myposImage, 'My position');
+    $('a[href="#mypos"]').addClass('active');
+    
     addresspickerMap.data().addresspicker._markerMoved();
     // find_closest_marker(latitude, longitude);
 }
@@ -171,7 +180,7 @@ $(function() {
     gmap = addresspickerMap.data().addresspicker.map();
     gmapmarker = addresspickerMap.data().addresspicker.marker();
 
-    gmapmarker.setIcon(myposImage);
+    gmapmarker.setIcon(newImage);
 
 
 
