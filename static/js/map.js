@@ -4,10 +4,15 @@ var gmapmarker;
 var point,
     points = new google.maps.LatLngBounds();
 
-var pinImage = new google.maps.MarkerImage("/static/img/ico_club.png",
+var clubImage = new google.maps.MarkerImage("/static/img/ico_club.png",
     new google.maps.Size(32, 32),
     new google.maps.Point(0,0),
     new google.maps.Point(16, 16),
+    new google.maps.Size(32, 32));
+var myposImage = new google.maps.MarkerImage("/static/img/ico_flag.png",
+    new google.maps.Size(32, 32),
+    new google.maps.Point(0,0),
+    new google.maps.Point(11, 32),
     new google.maps.Size(32, 32));
 
 
@@ -166,6 +171,7 @@ $(function() {
     gmap = addresspickerMap.data().addresspicker.map();
     gmapmarker = addresspickerMap.data().addresspicker.marker();
 
+    gmapmarker.setIcon(myposImage);
 
 
 
@@ -185,7 +191,7 @@ $(function() {
         var marker = addMarker(
             gmap,
             latLng,
-            pinImage,
+            clubImage,
             clubs.name,
             clubs.name + '<br />' + clubs.email + '<br />' + clubs.website
         );
