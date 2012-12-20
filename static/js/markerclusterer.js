@@ -179,7 +179,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   }
 }
 
-MarkerClusterer.prototype.onClick = function() { return true; };
+// MarkerClusterer.prototype.onClick = function() { return true; };
 
 /**
  * The marker cluster image path.
