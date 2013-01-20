@@ -19,10 +19,10 @@ class ClubForm(forms.ModelForm):
                 Field('name'),
                 Field('website'),
                 Field('email'),
+                Field('address_address', readonly='readonly', css_class='addresspicker_address'),
             ),
             Fieldset(
                 _(u'Localization'),
-                Field('address_address', autocomplete='off', css_class='addresspicker_address'),
                 Field('address_lat', readonly='readonly', css_class='addresspicker_lat'),
                 Field('address_lon', readonly='readonly', css_class='addresspicker_lng'),
                 Field('address_country', css_class='addresspicker_country'),

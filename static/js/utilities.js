@@ -10,9 +10,11 @@
 
             if ($(this).attr('href') == '#add-form' && !$(this).hasClass('active')) {
                 gmapmarker.setVisible(true);
+                $('.hint1').css('top', '75px');
                 addresspickerMap.data().addresspicker.reloadPosition();
             } else {
                 gmapmarker.setVisible(false);
+                $('.hint1').css('top', '-50px');
             }
 
             $('body').css({'padding-bottom': '0px'});

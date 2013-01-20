@@ -55,6 +55,26 @@ header h1 input[type="text"] {
     box-shadow: 1px 1px 5px #333;
 }
 
+.hint {
+}
+.hint1 {
+    width: 209px;
+    height: 43px;
+    background: url(../img/hint1.png);
+    top: -50px;
+    left: 207px;
+    background: #424242;
+    position: absolute;
+    font-size: 50%;
+    padding: 0 20px;
+    box-shadow: 1px 3px 5px #333;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+
 #map label { width: auto; display:inline; }
 #map img { max-width: none; }
 

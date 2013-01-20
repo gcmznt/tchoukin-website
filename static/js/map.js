@@ -10,11 +10,11 @@ var clubImage = new google.maps.MarkerImage("/static/img/ico_club.png",
     new google.maps.Point(0,0),
     new google.maps.Point(16, 16),
     new google.maps.Size(32, 32));
-var newImage = new google.maps.MarkerImage("/static/img/ico_flag.png",
-    new google.maps.Size(32, 32),
+var newImage = new google.maps.MarkerImage("/static/img/ico_flag_desc.png",
+    new google.maps.Size(205, 122),
     new google.maps.Point(0,0),
-    new google.maps.Point(12, 30),
-    new google.maps.Size(32, 32));
+    new google.maps.Point(12, 90),
+    new google.maps.Size(205, 122));
 var myposImage = new google.maps.MarkerImage("/static/img/crosshairred.png",
     new google.maps.Size(32, 32),
     new google.maps.Point(0,0),
