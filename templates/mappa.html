@@ -17,6 +17,17 @@
 
     <link href="{{ STATIC_URL }}css/tchoukin.css" rel="stylesheet">
 
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-37201680-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 </head>
 <body>
 
@@ -30,22 +41,24 @@
         </h1>
     </header>
     <footer>
-        <a href="#add-form" class="btn extra-tab">Add your place</a>
+        <a href="#add-form" class="btn extra-tab">Add your club</a>
         <a href="#mypos" class="btn">My position</a>
         <a href="#contacts" class="btn extra-tab">Contacts</a>
         <div class="extra" id="add-form">
             {% crispy clubform %}
         </div>
         <div class="extra" id="contacts">
-            <p style="padding: 20px;">giacomo.zinetti@tchoukball.it</p>
+            <p style="padding: 20px;">
+                <a href="https://twitter.com/TchoukIN">@TchoukIN</a>
+                <small class="pull-right">Icons by PC - <a class="external" href="http://pc.de">http://pc.de</a></small>
+            </p>
         </div>
     </footer>
 
     <script src="{{ STATIC_URL }}js/jquery-1.8.2.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js"></script>
+    <script src="{{ STATIC_URL }}js/markerclusterer_compiled.js"></script>
     <script src="/clubs/"></script>
-    <!-- <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/data.json"></script> -->
     <script src="{{ STATIC_URL }}js/bootstrap-typeahead.min.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.addresspicker.bootstrap.js"></script>
     <script src="{{ STATIC_URL }}js/utilities.js"></script>

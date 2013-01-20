@@ -35,7 +35,17 @@
         });
 
         $('a[href="#mypos"]').click(function(){
-            navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
+            if (myposmarker == undefined) {
+                navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
+            } else {
+                if ($(this).hasClass('active')) {
+                    myposmarker.setVisible(false);
+                    $(this).removeClass('active');
+                } else {
+                    myposmarker.setVisible(true);
+                    $(this).addClass('active');
+                }
+            }
             return false;
         });
 
