@@ -3,7 +3,7 @@ from models import Club
 
 
 class ClubAdmin(admin.ModelAdmin):
-	pass
+    list_display = ['name', 'status']
 
 
 admin.site.register(Club, ClubAdmin)
