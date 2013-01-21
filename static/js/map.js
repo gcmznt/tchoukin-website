@@ -202,7 +202,7 @@ $(function() {
             latLng,
             clubImage,
             clubs.name,
-            clubs.name + '<br />' + clubs.email + '<br />' + clubs.website
+            clubs.name + '<br />' + clubs.email + '<br /><a href="' + clubs.website + '">' + clubs.website + '</a>'
         );
         markers.push(marker);
     }
