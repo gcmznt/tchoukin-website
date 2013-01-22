@@ -6,6 +6,7 @@ from django.utils import simplejson as json
 from django.http import HttpResponse
 from tchoukin.clubs.models import Club
 from tchoukin.clubs.forms import ClubForm
+import twitter
 
 
 def get_field(f):
@@ -21,6 +22,9 @@ def confirmclub(request, code=''):
         instance.status = 'confirmed'
         instance.confirmation_code = ''
         instance.save()
+
+        api = twitter.Api(consumer_key='RQWOMjnOvzLetMsueVDhuQ', consumer_secret='WjVr9yjaz80oXIcRQUdM0gKKqqbiXSyiTFsgWtbPg', access_token_key='1024412977-nw6ecEQpl3U9ECuwCpj2nNKrJNsJhROzzbV3Zov', access_token_secret='TpSlRJwhFgPxHwwY3YBpUdkrXGikSQ0H2r6nfHBHSIQ')
+        api.PostUpdates('Wellcome on TchoukIN ' + instance.name)
     except:
         pass
 
