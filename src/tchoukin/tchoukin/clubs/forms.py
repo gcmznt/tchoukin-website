@@ -15,11 +15,11 @@ class ClubForm(forms.ModelForm):
         self.helper.form_action = reverse('save_club')
         self.helper.layout = Layout(
             Fieldset(
-                _(u'Informations'),
+                _(u'Add your TchoukPoint'),
                 Field('name'),
                 Field('website'),
                 Field('email'),
-                Field('address_address', readonly='readonly', css_class='addresspicker_address'),
+                Field('address_address', readonly='readonly', css_class='addresspicker_address', placeholder='drag the flag on the map'),
             ),
             Fieldset(
                 _(u'Localization'),
@@ -34,7 +34,7 @@ class ClubForm(forms.ModelForm):
                 css_class='hide',
             ),
             FormActions(
-                Submit('save-and-continue', 'Salva'),
+                Submit('save-and-continue', 'Save'),
             )
         )
         return super(ClubForm, self).__init__(*args, **kwargs)

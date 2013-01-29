@@ -3,7 +3,7 @@ from django.utils.translation import ugettext as _
 
 
 class Club(models.Model):
-    name = models.CharField(verbose_name=_(u'Name'), max_length=150, unique=True)
+    name = models.CharField(verbose_name=_(u'Name of the club'), max_length=150, unique=True)
     website = models.URLField(verbose_name=_(u'Website'), max_length=255, blank=True)
     email = models.EmailField(verbose_name=_(u'Email'), max_length=255)
 

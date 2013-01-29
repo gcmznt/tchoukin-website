@@ -6,38 +6,31 @@
     };
 
     $(document).ready(function(){
-        $('.extra-tab').click(function(){
+        $('#add-form-toggle').click(function(){
 
-            if ($(this).attr('href') == '#add-form' && !$(this).hasClass('active')) {
+            var self = $(this);
+            if (!self.hasClass('active')) {
                 gmapmarker.setVisible(true);
                 $('.hint1').css('top', '75px');
+                self.addClass('active');
+                $('#add-form').addClass('visible');
+                $('body').css({'padding-right': '240px'});
                 addresspickerMap.data().addresspicker.reloadPosition();
             } else {
                 gmapmarker.setVisible(false);
                 $('.hint1').css('top', '-50px');
+                self.removeClass('active');
+                $('#add-form').removeClass('visible');
+                $('body').css({'padding-right': '0'});
+                
+                timer = setInterval(function(){ google.maps.event.trigger(gmap, 'resize'); }, 220);
             }
 
-            $('body').css({'padding-bottom': '0px'});
-            var self = $(this);
-            if (self.hasClass('active')) {
-                $('.extra:visible').slideUp(200, resetViewport);
-                $('.extra-tab.active').removeClass('active');
-            } else {
-                if ($('.extra:visible').length > 0) {
-                    $('.extra:visible').slideUp(200, function(){
-                        $(self.attr('href')).slideDown(500, resetViewport);
-                    });
-                } else {
-                    $(self.attr('href')).slideDown(500, resetViewport);
-                }
-                $('.extra-tab.active').removeClass('active');
-                self.addClass('active');
-            }
             return false;
         });
 
         $('a[href="#mypos"]').click(function(){
-            if (myposmarker == undefined) {
+            if (myposmarker === undefined) {
                 navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
             } else {
                 if ($(this).hasClass('active')) {
@@ -58,21 +51,22 @@
 
         $('.ajax-form').submit(function(){
             var self = $(this);
+            self.find('[type="submit"]').val('saving...').addClass('disabled').attr('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 success: function(data){
                     if (data.status == 'ok') {
-                        self.find('input[type="text"]').val('');
-                        self.append('<div class="msg">Thank you! Check your email.</div>');
-                        gmapmarker.setVisible(false);
-                        setTimeout(function(){ $('footer .msg').fadeOut(); $('.extra:visible').slideUp(200, resetViewport); $('.extra-tab.active').removeClass('active'); }, 2500);
+                        self.find('input[type="text"]:not([readonly])').val('');
+                        $('.form-actions').before('<div class="alert alert-success">Thank you! Check your email, you will receive the instructions to activate the TchoukPoint.</div>');
+                        setTimeout(function(){ $('.ajax-form .alert').fadeOut(); $('#add-form-toggle').click(); }, 10000);
                     } else {
                         for (var err in data.errors) {
                             $('#div_id_' + err).addClass('error');
                         }
                     }
+                    self.find('[type="submit"]').val('Save').removeClass('disabled').removeAttr('disabled');
                 }
             });
             return false;

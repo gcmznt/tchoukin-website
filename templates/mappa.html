@@ -45,20 +45,16 @@
             <small>beta</small>
         </h1>
     </header>
-    <footer>
-        <a href="#add-form" class="btn extra-tab">Add your club</a>
-        <a href="#mypos" class="btn">My position</a>
-        <a href="#contacts" class="btn extra-tab">Contacts</a>
-        <div class="extra" id="add-form">
+    <div class="sidebar" id="add-form">
+        <div class="innerform">
             {% crispy clubform %}
         </div>
-        <div class="extra" id="contacts">
-            <p style="padding: 20px;">
-                <a href="https://www.facebook.com/tchoukIN">TchoukIN on Facebook</a>
-                <!-- <a href="https://twitter.com/TchoukIN">@TchoukIN</a> -->
-                <small class="pull-right">Icons by PC - <a class="external" href="http://pc.de">http://pc.de</a></small>
-            </p>
-        </div>
+    </div>
+    <footer>
+        <a href="#" id="add-form-toggle" class="btn">Add your TchoukPoint</a>
+        <a href="#mypos" class="btn">My position</a>
+        <a href="https://www.facebook.com/tchoukIN" class="btn">TchoukIN on Facebook</a>
+        <small class="pull-right credits">Icons by <a class="external" href="http://pc.de">PC</a></small>
     </footer>
 
     <script src="{{ STATIC_URL }}js/jquery-1.8.2.min.js"></script>
