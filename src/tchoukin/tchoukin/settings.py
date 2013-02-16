@@ -122,7 +122,8 @@ INSTALLED_APPS = (
     'south',
     'crispy_forms',
 
-    'tchoukin.clubs'
+    'tchoukin.clubs',
+    'tchoukin.events'
 )
 
 # A sample logging configuration. The only tangible logging

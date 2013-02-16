@@ -29,6 +29,10 @@
             return false;
         });
 
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
         $('a[href="#mypos"]').click(function(){
             if (myposmarker === undefined) {
                 navigator.geolocation.getCurrentPosition(locationSuccess, locationFail);
@@ -54,16 +58,20 @@
             self.find('[type="submit"]').val('saving...').addClass('disabled').attr('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
+                url: self.attr('action'),
+                data: self.serialize(),
                 success: function(data){
+                    self.find('.alert').remove();
                     if (data.status == 'ok') {
                         self.find('input[type="text"]:not([readonly])').val('');
-                        $('.form-actions').before('<div class="alert alert-success">Thank you! Check your email, you will receive the instructions to activate the TchoukPoint.</div>');
+                        self.find('.form-actions').before('<div class="alert alert-success">Thank you! Check your email, you will receive the instructions to activate the TchoukPoint.</div>');
                         setTimeout(function(){ $('.ajax-form .alert').fadeOut(); $('#add-form-toggle').click(); }, 10000);
                     } else {
                         for (var err in data.errors) {
-                            $('#div_id_' + err).addClass('error');
+                            self.find('#div_id_' + err).addClass('error');
+                        }
+                        if(data.errors.__all__ !== undefined) {
+                            self.find('.form-actions').before('<div class="alert alert-error">' + data.errors.__all__ + '</div>');
                         }
                     }
                     self.find('[type="submit"]').val('Save').removeClass('disabled').removeAttr('disabled');

@@ -56,11 +56,12 @@ def saveclub(request):
     return HttpResponse('')
 
 
-def allclubs(request):
+def allclubs():
     model_fields = ['name', 'website', 'email', 'address_lat', 'address_lon']
     clubs = []
     for instance in Club.objects.filter(status='confirmed'):
         row = dict((f, get_field(getattr(instance, f))) for f in model_fields)
+        row['type'] = 'club'
         clubs.append(row)
 
-    return HttpResponse('var data = {"clubs": ' + json.dumps(clubs) + '}', mimetype="application/json")
+    return clubs

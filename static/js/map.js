@@ -1,11 +1,17 @@
 var addresspickerMap;
 var gmap;
 var gmapmarker;
-var myposmarker = undefined;
+var myposmarker;
+var icon = [];
 var point,
     points = new google.maps.LatLngBounds();
 
-var clubImage = new google.maps.MarkerImage("/static/img/ico_club.png",
+icon['club'] = new google.maps.MarkerImage("/static/img/ico_club.png",
+    new google.maps.Size(32, 32),
+    new google.maps.Point(0,0),
+    new google.maps.Point(16, 16),
+    new google.maps.Size(32, 32));
+icon['event'] = new google.maps.MarkerImage("/static/img/ico_date.png",
     new google.maps.Size(32, 32),
     new google.maps.Point(0,0),
     new google.maps.Point(16, 16),
@@ -172,6 +178,7 @@ $(function() {
         markerPosition.getAddress( function(address) {
             if (address) {
                 $( ".addresspicker").val(address.formatted_address);
+                $( ".addresspicker_address").parents('.error').removeClass('error');
             }
         });
     });
@@ -191,27 +198,33 @@ $(function() {
 
 
 
+    $.ajax({
+        url: '/data/',
+        dataType: 'json',
+        success: function(data){
+            var markers = [];
+            for (var i = data.length; i > 0; i--) {
+                var flag = data[i-1];
+                var content = flag.name + '<br />' + flag.email + '<br /><a href="' + flag.website + '">' + flag.website + '</a><br />';
+                if (flag.from_date !== undefined) { content += flag.from_date; }
+                if (flag.to_date !== undefined) { content += " -> " + flag.to_date + "<br />"; }
 
-
-    var markers = [];
-    for (var i = data.clubs.length; i > 0; i--) {
-        var clubs = data.clubs[i-1];
-        var latLng = new google.maps.LatLng(clubs.address_lat, clubs.address_lon);
-        var marker = addMarker(
-            gmap,
-            latLng,
-            clubImage,
-            clubs.name,
-            clubs.name + '<br />' + clubs.email + '<br /><a href="' + clubs.website + '">' + clubs.website + '</a>'
-        );
-        markers.push(marker);
-    }
-    var markerCluster = new MarkerClusterer(gmap, markers);
-    // markerCluster.onClick = function() { return multiChoice(markerCluster); };
-
-
-
-    $(document).ready(function(){
+                var latLng = new google.maps.LatLng(flag.address_lat, flag.address_lon);
+                var marker = addMarker(
+                    gmap,
+                    latLng,
+                    icon[flag.type],
+                    flag.name,
+                    content
+                );
+                markers.push(marker);
+            }
+            var markerCluster = new MarkerClusterer(gmap, markers);
+            // markerCluster.onClick = function() { return multiChoice(markerCluster); };
+        }
     });
 
 });
+
+
+

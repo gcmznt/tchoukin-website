@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^clubs/', include('tchoukin.clubs.urls')),
+    url(r'^events/', include('tchoukin.events.urls')),
     url(r'^', include('tchoukin.website.urls')),
 )

@@ -8,5 +8,4 @@ from tchoukin.clubs.views import allclubs, saveclub, confirmclub
 urlpatterns = patterns('',
     url(r'^confirm/(?P<code>.*)/$', confirmclub, name="confirm_club"),
     url(r'^save/$', saveclub, name="save_club"),
-    url(r'^$', allclubs, name="clubs_list"),
 )

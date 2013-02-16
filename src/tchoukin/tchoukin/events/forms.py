@@ -4,19 +4,21 @@ from django.core.urlresolvers import reverse
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Field, Submit, Button, Hidden, Div, HTML
 from crispy_forms.bootstrap import FormActions, AppendedText, PrependedAppendedText
-from models import Club
+from models import Event
 
 
-class ClubForm(forms.ModelForm):
+class EventForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_class = 'add-form ajax-form'
-        self.helper.form_action = reverse('save_club')
+        self.helper.form_action = reverse('save_event')
         self.helper.layout = Layout(
             Field('name'),
             Field('website'),
             Field('email'),
+            Field('from_date', css_class='datepicker'),
+            Field('to_date', css_class='datepicker'),
             Field('address_address', readonly='readonly', css_class='addresspicker_address', placeholder='drag the flag on the map'),
             Fieldset(
                 _(u'Localization'),
@@ -34,14 +36,16 @@ class ClubForm(forms.ModelForm):
                 Submit('save-and-continue', 'Save'),
             )
         )
-        return super(ClubForm, self).__init__(*args, **kwargs)
+        return super(EventForm, self).__init__(*args, **kwargs)
 
     class Meta:
-        model = Club
+        model = Event
         fields = [
             'name',
             'website',
             'email',
+            'from_date',
+            'to_date',
             'address_address',
             'address_lat',
             'address_lon',
