@@ -4,7 +4,7 @@
 /media
 *virtualenv*
 /src/docroot/static
-*settings_local.py
+*settings_*.py
 
 # Mac OS X
 *.DS_Store
