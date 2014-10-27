@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
-from django.utils import simplejson as json
+import json
 from tchoukin.clubs.forms import ClubForm
 from tchoukin.clubs.views import allclubs
 from tchoukin.events.forms import EventForm
@@ -22,4 +22,5 @@ def initmap(request, where='', template='home.html'):
 def alldata(request):
     data = (allevents() + allclubs())
 
-    return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), mimetype="application/json")
+    
+    return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json")

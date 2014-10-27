@@ -3,7 +3,7 @@ import socket
 from django.core.mail import send_mail
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render, redirect
-from django.utils import simplejson as json
+import json
 from django.http import HttpResponse
 from datetime import datetime
 from tchoukin.events.models import Event

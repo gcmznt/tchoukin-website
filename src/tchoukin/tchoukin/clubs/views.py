@@ -2,7 +2,7 @@ import uuid
 import socket
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.utils import simplejson as json
+import json
 from django.http import HttpResponse
 from tchoukin.clubs.models import Club
 from tchoukin.clubs.forms import ClubForm
