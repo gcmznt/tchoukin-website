@@ -51,7 +51,7 @@ def saveclub(request):
             response['status'] = 'ko'
             response['errors'] = form.errors
 
-        return HttpResponse(json.dumps(response), mimetype="application/json")
+        return HttpResponse(json.dumps(response), content_type="application/json")
 
     return HttpResponse('')
 

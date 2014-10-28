@@ -22,5 +22,4 @@ def initmap(request, where='', template='home.html'):
 def alldata(request):
     data = (allevents() + allclubs())
 
-    
     return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json")
